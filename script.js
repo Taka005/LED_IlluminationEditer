@@ -185,14 +185,14 @@ setGridBtn.addEventListener("click",()=>{
   const newWidth = parseInt(gridWidthInput.value);
   const newHeight = parseInt(gridHeightInput.value);
 
-  const isValid = (val) => val >= 5 && val <= 128;
+  const isValid = (val) => val >= 1 && val <= 128;
 
   if(isValid(newWidth) && isValid(newHeight)){
     if(newWidth !== currentWidth || newHeight !== currentHeight){
       createGrid(newWidth, newHeight);
     }
   }else{
-    alert("グリッドの幅(ROW)と高さ(COLUMN)は5から128の間で設定してください");
+    alert("グリッドの幅(ROW)と高さ(COLUMN)は1から128の間で設定してください");
 
     gridWidthInput.value = currentWidth;
     gridHeightInput.value = currentHeight;

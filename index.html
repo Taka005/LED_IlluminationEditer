@@ -10,14 +10,14 @@
     <h1>ドット絵エディタ</h1>
     <div class="controls">
         <div class="control-group">
-            <label for="colorPicker">描画色:</label>
+            <label for="colorPicker">色:</label>
             <input type="color" id="colorPicker" value="#FFFFFF">
         </div>
         <div class="control-group size-inputs">
             <label for="gridWidth">幅 (ROW):</label>
-            <input type="number" id="gridWidth" min="5" max="64" value="16">
+            <input type="number" id="gridWidth" min="1" max="128" value="16">
             <label for="gridHeight">高さ (COLUMN):</label>
-            <input type="number" id="gridHeight" min="5" max="64" value="16">
+            <input type="number" id="gridHeight" min="1" max="128" value="16">
             <button id="setGridBtn">設定</button>
         </div>
         <button id="resetBtn">リセット</button>
@@ -25,7 +25,7 @@
     <div id="gridContainer"></div>
     <div class="data-area">
         <h2>JSON データ</h2>
-        <textarea id="jsonOutput" placeholder="ここにJSONデータが表示されます。JSONを入力して[インポート]も可能です"></textarea>
+        <textarea id="jsonOutput" placeholder="ここにJSONデータが表示されます"></textarea>
         <div class="data-buttons">
             <button id="exportBtn">エクスポート</button>
             <button id="importBtn">インポート</button>
