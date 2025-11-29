@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドット絵エディタ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>ドット絵エディタ</h1>
+    <div class="controls">
+        <div class="control-group">
+            <label for="colorPicker">描画色:</label>
+            <input type="color" id="colorPicker" value="#FFFFFF">
+        </div>
+        <div class="control-group size-inputs">
+            <label for="gridWidth">幅 (ROW):</label>
+            <input type="number" id="gridWidth" min="5" max="64" value="16">
+            <label for="gridHeight">高さ (COLUMN):</label>
+            <input type="number" id="gridHeight" min="5" max="64" value="16">
+            <button id="setGridBtn">設定</button>
+        </div>
+        <button id="resetBtn">リセット</button>
+    </div>
+    <div id="gridContainer"></div>
+    <div class="data-area">
+        <h2>JSON データ</h2>
+        <textarea id="jsonOutput" placeholder="ここにJSONデータが表示されます。JSONを入力して[インポート]も可能です"></textarea>
+        <div class="data-buttons">
+            <button id="exportBtn">エクスポート</button>
+            <button id="importBtn">インポート</button>
+            <button id="copyBtn">コピー</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
