@@ -108,13 +108,13 @@ function exportGridToJson(){
     ) return;
 
     const col = parseInt(pixel.dataset.col);
-    const row_browser = parseInt(pixel.dataset.row);
+    const rowBrowser = parseInt(pixel.dataset.row);
 
-    const y_inverted = currentHeight - 1 - row_browser;
+    const yInverted = currentHeight - 1 - rowBrowser;
 
     pixelData.push({
       "x": col,
-      "y": y_inverted,
+      "y": yInverted,
       "r": r,
       "g": g,
       "b": b
@@ -135,21 +135,21 @@ function importGridFromJson(){
     const pixels = document.querySelectorAll("#gridContainer .pixel");
     pixels.forEach(p=>p.style.backgroundColor = "transparent");
 
-    let max_x = 0;
-    let max_y = 0;
+    let maxX = 0;
+    let maxY = 0;
 
     pixelData.forEach(data=>{
       if(data.x < 0 || data.y < 0 || data.x >= currentWidth || data.y >= currentHeight){
-        max_x = Math.max(max_x, data.x);
-        max_y = Math.max(max_y, data.y);
+        maxX = Math.max(maxX, data.x);
+        maxY = Math.max(maxY, data.y);
       }
     });
 
-    if(max_x >= currentWidth || max_y >= currentHeight){
-      const confirm_resize = confirm(`インポートに必要なサイズは (${max_x + 1}x${max_y + 1}) ですが、現在のグリッドは (${currentWidth}x${currentHeight}) です。グリッドをリサイズして描画しますか？ (キャンセルした場合、サイズ外のピクセルは無視されます)`);
-      if(confirm_resize){
-        const newWidth = Math.max(currentWidth, max_x + 1);
-        const newHeight = Math.max(currentHeight, max_y + 1);
+    if(maxX >= currentWidth || maxY >= currentHeight){
+      const confirmResize = confirm(`インポートに必要なサイズは (${maxX + 1}x${maxY + 1}) ですが、現在のグリッドは (${currentWidth}x${currentHeight}) です。グリッドをリサイズして描画しますか？ (キャンセルした場合、サイズ外のピクセルは無視されます)`);
+      if(confirmResize){
+        const newWidth = Math.max(currentWidth, maxX + 1);
+        const newHeight = Math.max(currentHeight, maxY + 1);
 
         gridWidthInput.value = newWidth;
         gridHeightInput.value = newHeight;
@@ -160,15 +160,15 @@ function importGridFromJson(){
 
     pixelData.forEach(data=>{
       const x = data.x;
-      const y_inverted = data.y;
+      const yInverted = data.y;
       const r = data.r;
       const g = data.g;
       const b = data.b;
 
-      const row_browser = currentHeight - 1 - y_inverted;
+      const rowBrowser = currentHeight - 1 - yInverted;
 
-      if(x >= 0 && x < currentWidth && row_browser >= 0 && row_browser < currentHeight){
-        const pixel = document.querySelector(`.pixel[data-col="${x}"][data-row="${row_browser}"]`);
+      if(x >= 0 && x < currentWidth && rowBrowser >= 0 && rowBrowser < currentHeight){
+        const pixel = document.querySelector(`.pixel[data-col="${x}"][data-row="${rowBrowser}"]`);
 
         if(pixel){
           pixel.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
