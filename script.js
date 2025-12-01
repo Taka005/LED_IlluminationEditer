@@ -101,6 +101,12 @@ function exportGridToJson(){
     const g = parseInt(rgbMatch[2]);
     const b = parseInt(rgbMatch[3]);
 
+    if(
+      r === 0&&
+      g === 0&&
+      b === 0
+    ) return;
+
     const col = parseInt(pixel.dataset.col);
     const row_browser = parseInt(pixel.dataset.row);
 
