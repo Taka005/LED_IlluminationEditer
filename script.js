@@ -145,11 +145,24 @@ function importGridFromJson(){
       }
     });
 
-    if(maxX >= currentWidth || maxY >= currentHeight){
+    if(maxX > currentWidth || maxY > currentHeight){
       const confirmResize = confirm(`インポートに必要なサイズは (${maxX + 1}x${maxY + 1}) ですが、現在のグリッドは (${currentWidth}x${currentHeight}) です。グリッドをリサイズして描画しますか？ (キャンセルした場合、サイズ外のピクセルは無視されます)`);
       if(confirmResize){
         const newWidth = Math.max(currentWidth, maxX + 1);
         const newHeight = Math.max(currentHeight, maxY + 1);
+
+        gridWidthInput.value = newWidth;
+        gridHeightInput.value = newHeight;
+
+        createGrid(newWidth, newHeight);
+      }
+    }
+
+    if(maxX < currentWidth || maxY < currentHeight){
+      const confirmResize = confirm(`インポートに必要なサイズは (${maxX + 1}x${maxY + 1}) ですが、現在のグリッドは (${currentWidth}x${currentHeight}) です。グリッドをリサイズして描画しますか？ (キャンセルした場合、サイズ外にピクセルが設置されます)`);
+      if(confirmResize){
+        const newWidth = Math.min(currentWidth, maxX + 1);
+        const newHeight = Math.min(currentHeight, maxY + 1);
 
         gridWidthInput.value = newWidth;
         gridHeightInput.value = newHeight;
