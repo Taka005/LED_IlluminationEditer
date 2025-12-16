@@ -14,6 +14,7 @@ let currentWidth = parseInt(gridWidthInput.value);
 let currentHeight = parseInt(gridHeightInput.value);
 let currentColor = colorPicker.value;
 let isDrawing = false;
+let isClearing = false;
 
 function hexToRgb(hex){
   const bigint = parseInt(hex.slice(1), 16);
@@ -55,8 +56,7 @@ function createGrid(width, height){
 
     pixel.addEventListener("mousedown", startDrawing);
     pixel.addEventListener("mouseover", drawPixel);
-
-    pixel.addEventListener("mousedown", clearPixel);
+    pixel.addEventListener("contextmenu", (event)=>{ event.preventDefault(); });
 
     gridContainer.appendChild(pixel);
   }
@@ -75,6 +75,11 @@ function startDrawing(event){
 
     isDrawing = true;
     applyColor(event.target);
+  }else if(event.button === 2){
+    event.preventDefault();
+
+    isClearing = true;
+    event.target.style.backgroundColor = "transparent";
   }
 }
 
@@ -83,11 +88,7 @@ function drawPixel(event){
     event.preventDefault();
 
     applyColor(event.target);
-  }
-}
-
-function clearPixel(event){
-  if(event.button === 2){
+  }else if(isClearing && event.target.classList.contains("pixel")){
     event.preventDefault();
 
     event.target.style.backgroundColor = "transparent";
@@ -96,6 +97,7 @@ function clearPixel(event){
 
 function stopDrawing(){
   isDrawing = false;
+  isClearing = false;
 }
 
 function exportGridToJson(){
