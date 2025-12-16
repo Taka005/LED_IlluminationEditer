@@ -56,6 +56,8 @@ function createGrid(width, height){
     pixel.addEventListener("mousedown", startDrawing);
     pixel.addEventListener("mouseover", drawPixel);
 
+    pixel.addEventListener("mousedown", clearPixel);
+
     gridContainer.appendChild(pixel);
   }
 
@@ -69,6 +71,8 @@ function applyColor(pixel){
 
 function startDrawing(event){
   if(event.button === 0){
+    event.preventDefault();
+
     isDrawing = true;
     applyColor(event.target);
   }
@@ -76,7 +80,17 @@ function startDrawing(event){
 
 function drawPixel(event){
   if(isDrawing && event.target.classList.contains("pixel")){
+    event.preventDefault();
+
     applyColor(event.target);
+  }
+}
+
+function clearPixel(event){
+  if(event.button === 2){
+    event.preventDefault();
+
+    event.target.style.backgroundColor = "transparent";
   }
 }
 
