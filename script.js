@@ -9,6 +9,8 @@ const jsonOutput = document.getElementById("jsonOutput");
 const exportBtn = document.getElementById("exportBtn");
 const importBtn = document.getElementById("importBtn");
 const copyBtn = document.getElementById("copyBtn");
+const saveBtn = document.getElementById("saveBtn");
+const restoreBtn = document.getElementById("restoreBtn");
 
 let currentWidth = parseInt(gridWidthInput.value);
 let currentHeight = parseInt(gridHeightInput.value);
@@ -247,6 +249,23 @@ copyBtn.addEventListener("click",()=>{
     .then(()=>{
       alert("コピーしました");
     });
+});
+
+saveBtn.addEventListener("click",()=>{
+  if(!jsonOutput.value) return alert("エクスポートを先に行ってください");
+
+  localStorage.setItem("jsonData", jsonOutput.value);
+
+  alert("保存しました");
+});
+
+restoreBtn.addEventListener("click",()=>{
+  const savedData = localStorage.getItem("jsonData");
+  if(!savedData) return alert("保存されたデータが見つかりません");
+
+  jsonOutput.value = savedData;
+
+  importGridFromJson();
 });
 
 document.addEventListener("mouseup", stopDrawing);
